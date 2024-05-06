@@ -16,6 +16,7 @@ class MyButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialButton(
+      shape: const StadiumBorder(),
       onPressed: () => onPressed(),
       color: color,
       child: Padding(
