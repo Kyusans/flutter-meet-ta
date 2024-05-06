@@ -1,9 +1,9 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_meet_ta/components/my_button.dart';
 import 'package:flutter_meet_ta/components/my_textfield.dart';
+import 'package:flutter_meet_ta/components/show_alert.dart';
 import 'package:flutter_meet_ta/session_storage.dart';
 import 'package:http/http.dart' as http;
 
@@ -83,6 +83,14 @@ class _LoginState extends State<Login> {
 
       var response = await http.post(Uri.parse(url), body: requestBody);
       var res = jsonDecode(response.body);
-    } catch (e) {}
+      if (res != 0) {
+        ShowAlert().showAlert("success", "Welcome ${res['user_firstName']}!");
+      } else {
+        ShowAlert().showAlert("danger", "Invalid username or password!");
+      }
+    } catch (e) {
+      ShowAlert().showAlert("danger", "Network problem!");
+      print("network problem sa login.dart handleLogin function: $e");
+    }
   }
 }
