@@ -69,6 +69,12 @@ class _MyTextfieldState extends State<MyTextfield> {
                 : null,
         prefix: widget.prefixIcon != null ? Icon(widget.prefixIcon) : null,
       ),
+      validator: (value) {
+        if (value == null || value.isEmpty) {
+          return 'This field is required';
+        }
+        return null;
+      },
     );
   }
 }
