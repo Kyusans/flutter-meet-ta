@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_meet_ta/pages/login.dart';
 import 'package:get/get.dart';
 
 void main() {
@@ -11,7 +12,11 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(brightness: Brightness.dark),
+      home: const Scaffold(
+        body: Login(),
+      ),
     );
   }
 }
