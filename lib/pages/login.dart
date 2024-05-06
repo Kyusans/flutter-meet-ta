@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_meet_ta/components/my_button.dart';
 import 'package:flutter_meet_ta/components/my_textfield.dart';
 
 class Login extends StatefulWidget {
@@ -37,6 +38,13 @@ class _LoginState extends State<Login> {
                   labelText: "Password",
                   controller: _passwordController,
                   isObscure: true,
+                ),
+                const SizedBox(height: 16.0),
+                MyButton(
+                  onPressed: () {},
+                  text: "Login",
+                  color: Theme.of(context).colorScheme.primaryContainer,
+                  size: 16,
                 )
               ]),
             ),
