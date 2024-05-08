@@ -4,7 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_meet_ta/components/my_button.dart';
 import 'package:flutter_meet_ta/components/my_textfield.dart';
 import 'package:flutter_meet_ta/components/show_alert.dart';
+import 'package:flutter_meet_ta/pages/signup.dart';
 import 'package:flutter_meet_ta/session_storage.dart';
+import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 
 class Login extends StatefulWidget {
@@ -62,6 +64,12 @@ class _LoginState extends State<Login> {
                 ]),
               ),
             ),
+          ),
+          TextButton(
+            onPressed: () {
+              Get.to(const Signup());
+            },
+            child: const Text("Don't have an account? Sign up"),
           )
         ],
       ),
@@ -70,7 +78,7 @@ class _LoginState extends State<Login> {
 
   void handleLogin() async {
     try {
-      const url = "${SessionStorage.url}user.php";
+      var url = Uri.parse("${SessionStorage.url}user.php");
       Map<String, String> jsonData = {
         "username": _usernameController.text,
         "password": _passwordController.text,
@@ -81,7 +89,7 @@ class _LoginState extends State<Login> {
         "json": jsonEncode(jsonData),
       };
 
-      var response = await http.post(Uri.parse(url), body: requestBody);
+      var response = await http.post(url, body: requestBody);
       var res = jsonDecode(response.body);
       if (res != 0) {
         ShowAlert().showAlert("success", "Welcome ${res['user_firstName']}!");

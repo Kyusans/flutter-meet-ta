@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class MyTextfield extends StatefulWidget {
   final String labelText;
@@ -9,6 +10,7 @@ class MyTextfield extends StatefulWidget {
   final IconData? suffixIcon;
   final IconData? prefixIcon;
   final int? maxLength;
+  final bool? isEmail;
 
   const MyTextfield({
     Key? key,
@@ -20,6 +22,7 @@ class MyTextfield extends StatefulWidget {
     this.suffixIcon,
     this.prefixIcon,
     this.maxLength,
+    this.isEmail,
   }) : super(key: key);
 
   @override
@@ -72,6 +75,8 @@ class _MyTextfieldState extends State<MyTextfield> {
       validator: (value) {
         if (value == null || value.isEmpty) {
           return 'This field is required';
+        } else if (widget.isEmail == true && !GetUtils.isEmail(value)) {
+          return "Please enter a valid email";
         }
         return null;
       },
