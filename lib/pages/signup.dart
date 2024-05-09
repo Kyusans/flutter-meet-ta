@@ -1,11 +1,11 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_meet_ta/components/loading_spinner.dart';
 import 'package:flutter_meet_ta/components/my_button.dart';
 import 'package:flutter_meet_ta/components/my_textfield.dart';
 import 'package:flutter_meet_ta/components/show_alert.dart';
 import 'package:flutter_meet_ta/session_storage.dart';
-import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 
 class Signup extends StatefulWidget {
@@ -75,16 +75,18 @@ class _SignupState extends State<Signup> {
                 isEmail: true,
               ),
               const SizedBox(height: 16),
-              MyButton(
-                onPressed: () {
-                  if (_formKey.currentState!.validate()) {
-                    handleSignUp();
-                  }
-                },
-                text: "Sign up",
-                color: Theme.of(context).colorScheme.primaryContainer,
-                size: 16,
-              )
+              _isLoading
+                  ? const LoadingSpinner()
+                  : MyButton(
+                      onPressed: () {
+                        if (_formKey.currentState!.validate()) {
+                          handleSignUp();
+                        }
+                      },
+                      text: "Sign up",
+                      color: Theme.of(context).colorScheme.primaryContainer,
+                      size: 16,
+                    )
             ],
           ),
         ),
